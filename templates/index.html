@@ -1,0 +1,22 @@
+{% extends './base.html' %}
+
+{% block title %}
+    Home | Djago
+{% endblock title %}
+
+{% block contect %}
+    <form action="get">
+            
+            {% for key,value in form.items %}
+                
+                {% if value == "sagar" %}
+                    <h1>This is my Name</h1>
+                {% else %}
+                    <h1>This is My data</h1>
+                {% endif %}
+            {% endfor %}
+
+          
+    </form>
+{% endblock contect %}
+
