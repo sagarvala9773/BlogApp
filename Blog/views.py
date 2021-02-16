@@ -39,11 +39,8 @@ def log_out(request):
     if request.user.is_authenticated:
         print(request.user.username)
         logout(request)
-        messages.add_message(request,messages.SUCCESS,'Thankyou For visiting out site')
-        return render(request,'logout.html')
-    else:
-        fm=AuthenticationForm()
-    return render(request,'login.html',{'forms':fm})
+        messages.add_message(request,messages.SUCCESS,'Thankyou
+        uest,'login.html',{'forms':fm})
 
 def userprofile(request):
     if request.user.is_authenticated:
