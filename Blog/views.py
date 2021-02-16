@@ -49,6 +49,7 @@ def userprofile(request):
     if request.user.is_authenticated:
         messages.add_message(request,messages.SUCCESS,'Welcome to out site')
         u=request.user
+        
         return render(request,'profile.html',{'user':u})
 
     else:
