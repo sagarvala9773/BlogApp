@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse,HttpResponseRedirect
 from django.contrib.auth import authenticate,login,logout, update_session_auth_hash
-from django.contrib.auth.forms import AuthenticationForm,PasswordChangeForm
-from .forms import CreateUser
+from django.contrib.auth.forms import AuthenticationForm,PasswordChangeForm, UserChangeForm
+from .forms import CreateUser,UserProfile,AdminProfile
 from django.contrib import messages
+from django.contrib.auth.models import User
 # Create your views here.
 
 def log_in(request):
@@ -37,21 +38,23 @@ def sign_up(request):
 
 def log_out(request):
     if request.user.is_authenticated:
-        print(request.user.username)
         logout(request)
-        messages.add_message(request,messages.SUCCESS,'Thankyou
-        uest,'login.html',{'forms':fm})
+    return HttpResponseRedirect('/')
 
 def userprofile(request):
     if request.user.is_authenticated:
-        messages.add_message(request,messages.SUCCESS,'Welcome to out site')
-        u=request.user
-        
-        return render(request,'profile.html',{'user':u})
+        u=User.objects.all()
+        if request.method=="POST":
+            fm=UserProfile(request.POST,instance=request.user)
+            if fm.is_valid():
+                fm.save()
+                return HttpResponseRedirect('/')
+        else:
+            u=User.objects.all()
+            fm=UserProfile(instance=request.user)
+        return render(request,'profile.html',{'forms':fm,'users':u})
 
-    else:
-        fm=AuthenticationForm()
-    return render(request,'login.html',{'forms':fm})
+    return HttpResponseRedirect('/')
 
 
 def change_password(request):
@@ -65,8 +68,19 @@ def change_password(request):
         else:
             fm=PasswordChangeForm(user=request.user)
         return render(request,'changepassword.html',{'forms':fm})
-    else:
-        fm=AuthenticationForm()
-    return render(request,'login.html',{'forms':fm})
 
+    return HttpResponseRedirect('/')
 
+def show_user(request,my_id):
+    if request.user.is_authenticated:
+        fm=User.objects.get(pk=my_id)
+   
+        return render(request,'showuser.html',{'forms':fm})
+    return HttpResponseRedirect('/')
+
+def delete_user(request,my_id):
+    if request.user.is_authenticated:
+        fm=User.objects.get(pk=my_id)
+        fm.delete()
+
+    return HttpResponseRedirect('/')

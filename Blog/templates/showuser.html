@@ -1,0 +1,19 @@
+{% extends './base.html' %}
+
+{% block title %}
+    <title>User-Detail</title>
+{% endblock title %}
+
+{% block content %}
+    {% for fm in forms.keys %}
+        <h1>{{fm}}</h1>
+    
+    {% endfor %}
+
+    {{forms.username}}
+
+{% endblock content %}
+
+
+
+

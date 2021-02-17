@@ -5,20 +5,35 @@
 {% endblock title %}
 
 {% block content %}
-    {% if messages %}
-    
-        {% for message in messages %}
-            <small {% if message.tag %} class="{{message.tag}}" {% endif %}>{{message}}</small>
+    {% if users %}
+        {% for user in  users %}
+            
+            
+            
+                {% if perms.auth.view_user %}
+                    <a href="{% url 'showuser' user.id %}">{{user.username}}</a><br>
+                {% endif %}
 
+                {% if perms.auth.delete_user %}
+                    <a href="{% url 'deleteuser' user.id %}">delete</a><br>
+                {% endif %}
+
+              
         {% endfor %}
-
-        <h1>{{user.username}}</h1>
-        <h1>{{user.is_staff}}</h1>
-        <h1>{{user.last_login}}</h1>
-        <h1>{{user.get_full_name}}</h1>
-
-         <a href="{% url 'logout' %}">logout</a><br>
-         <a href="{% url 'changepassword' %}">changePassword</a><br>
+    
     {% endif %}
+
+    <form action="" method="POST" novalidate>
+        {% csrf_token %}
+        {% for fm in forms %}
+            {{fm.label_tag}} {{fm}} {{fm.errors|striptags}}<br><br>
+        
+        {% endfor %}
+        <input type="submit" value="save">
+    </form>
+
+    <a href="{% url 'logout' %}">logout</a><br>
+    <a href="{% url 'changepassword' %}">changePassword</a><br>
+  
 {% endblock content %}
 
