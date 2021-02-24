@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    
+</head>
+<body>
+    <form method="POST"> 
+        {% csrf_token %}
+        {% for fm in form %}
+
+            {{ fm.label_tag }} {{ fm }} {{ fm.errors|striptags }} <br> <br>
+    
+        {% endfor %}
+
+        <input type="submit" value="Save">
+    </form>
+
+    {% for ob in obj %}
+
+        {{ ob.roll_no }} {{ ob.name }} 
+    
+        <a href="{% url 'update' ob.roll_no %}">Edit</a>
+        
+        <form action="{% url 'delete' ob.roll_no %}" method="POST">
+            {% csrf_token %}
+            <input type="submit" value="delete">
+        </form>
+    {% endfor %}
+
+</body>
+</html>
