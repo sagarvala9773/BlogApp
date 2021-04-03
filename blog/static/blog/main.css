@@ -1,7 +1,11 @@
 body {
-    background: #fafafa;
     color: #333333;
     margin-top: 5rem;
+    background-image: url(background-1.jpg);
+    background-size: cover;
+    background-position: center;
+    box-sizing: border-box;
+    font-family: sans-serif;
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -15,13 +19,13 @@ body {
   .bg-steel {
     background-color: #5f788a;
   }
-  
+  .navbar { background-color: #484848; }
   .site-header .navbar-nav .nav-link {
-    color: #cbd5db;
+    color: #fff; ;
   }
   
   .site-header .navbar-nav .nav-link:hover {
-    color: #ffffff;
+    color: #fbc531;
   }
   
   .site-header .navbar-nav .nav-link.active {
@@ -29,15 +33,19 @@ body {
   }
   
   .content-section {
-    background: #ffffff;
+    background-image: url(post.jpeg);
     padding: 10px 20px;
     border: 1px solid #dddddd;
     border-radius: 3px;
     margin-bottom: 20px;
   }
   
+  
   .article-title {
-    color: #444444;
+    color: #7e1968;
+    font-size: 32px;
+    font-family: sans-serif;
+    font-weight: bold;
   }
   
   a.article-title:hover {
@@ -47,6 +55,8 @@ body {
   
   .article-content {
     white-space: pre-line;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 28px;
   }
   
   .article-img {
